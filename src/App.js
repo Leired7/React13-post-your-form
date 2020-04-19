@@ -1,12 +1,12 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import FormEmployee from "./components/FormEmployee";
+import FormFavoritemovie from "./components/FormFavoritemovie";
 
 function App() {
   return (
     <div className="App">
-      <FormEmployee />
+      <FormFavoritemovie />
     </div>
   );
 }

@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 
-export default class FormEmployee extends Component {
+export default class FormFavoritemovie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lastname: "",
-      firstname: "",
-      email: "",
+      title: "",
+      poster: "",
+      comment: "",
     };
     this.onChange = this.onChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
-    this.newEmployee = this.newEmployee.bind(this);
+    this.newFavoritemovie = this.newFavoritemovie.bind(this);
   }
 
   onChange(event) {
@@ -23,7 +23,7 @@ export default class FormEmployee extends Component {
     event.preventDefault();
   }
 
-  newEmployee() {
+  newFavoritemovie() {
     const config = {
       method: "POST",
       headers: {
@@ -32,7 +32,7 @@ export default class FormEmployee extends Component {
       body: JSON.stringify(this.state),
     };
 
-    const url = "https://post-a-form.herokuapp.com/api/employees/";
+    const url = "https://post-a-form.herokuapp.com/api/movies";
 
     fetch(url, config)
       .then((res) => res.json())
@@ -40,56 +40,60 @@ export default class FormEmployee extends Component {
         if (res.error) {
           alert(res.error);
         } else {
-          alert(`Employee ${res.name} has been successfully added!`);
+          alert(`Movie ${res} has been successfully added!`);
         }
       })
       .catch((e) => {
         console.error(e);
-        alert("There was an error when adding the employee.");
+        alert("There was an error when adding the movie.");
       });
   }
 
   render() {
     return (
-      <div className="FormEmployee">
-        <h1>New Employee</h1>
+      <div className="FormFavoritemovie">
+        <h1>New Movie</h1>
 
         <form onSubmit={this.submitForm}>
           <fieldset>
             <legend>Information</legend>
             <div className="form-data">
-              <label htmlFor="lastname">Last Name</label>
+              <label htmlFor="title">Title</label>
               <input
                 type="text"
-                id="lastname"
-                name="lastname"
+                id="title"
+                name="title"
                 onChange={this.onChange}
-                value={this.state.lastname}
+                value={this.state.title}
               />
             </div>
             <div className="form-data">
-              <label htmlFor="firtsname">First name</label>
+              <label htmlFor="poster">Poster</label>
               <input
                 type="text"
-                id="firstname"
-                name="firstname"
+                id="poster"
+                name="poster"
                 onChange={this.onChange}
-                value={this.state.firstname}
+                value={this.state.poster}
               />
             </div>
             <div className="form-data">
-              <label htmlFor="email">Email Address</label>
+              <label htmlFor="comment">Comment</label>
               <input
-                type="email"
-                id="email"
-                name="email"
+                type="textarea"
+                id="comment"
+                name="comment"
                 onChange={this.onChange}
-                value={this.state.email}
+                value={this.state.comment}
               />
             </div>
             <hr />
             <div className="form-data">
-              <input type="submit" value="Send" onClick={this.newEmployee} />
+              <input
+                type="submit"
+                value="Send"
+                onClick={this.newFavoritemovie}
+              />
             </div>
           </fieldset>
         </form>
